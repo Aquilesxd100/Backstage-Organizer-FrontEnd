@@ -10,6 +10,9 @@ interface IHeaderProps {
 export default function Header({
   startWeekDate
 }: IHeaderProps) {
+  
+  // Falta deixar quantidade de dias restantes para concluir
+  // tarefa dinamicos e alterar cores de acordo
 
   return (
     <HeaderBox 
@@ -28,7 +31,7 @@ export default function Header({
       <Box
         display="flex"
         flexDirection="column"
-        sx={startWeekDate 
+        sx={!startWeekDate 
           ? { opacity: 0, pointerEvents: "none"} 
           : {}
         }
