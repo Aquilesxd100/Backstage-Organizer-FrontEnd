@@ -1,10 +1,20 @@
+import { Box } from "@mui/material";
+
+import Header from "./components/Header";
+
+import "./css/styles.css";
+
 function App() {
   return (
-    <div>
-      <header>
+    <Box
+      width="100%"
+      minHeight="100vh"
+    >
+      <Header />
+      <body>
 
-      </header>
-    </div>
+      </body>
+    </Box>
   );
 }
 
