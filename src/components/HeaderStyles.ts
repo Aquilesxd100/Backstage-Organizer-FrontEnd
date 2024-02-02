@@ -13,7 +13,6 @@ export const HeaderBox = styled(Box)({
   padding: defaultTheme.spacing(1),
   paddingRight: defaultTheme.spacing(2),
   paddingLeft: defaultTheme.spacing(2),
-  py: defaultTheme.spacing(2),
   borderBottom: "4px solid #00A99D",
   boxShadow: "1px 1px 1px rgba(0, 0, 0, 0.6)",
   backgroundImage: `url(${fundoPapelInfinitoIMG})`
