@@ -89,7 +89,7 @@ export default function Content() {
                           color="success" 
                         />
                       } 
-                      label={task.title} 
+                      label={`${index + 1} - ${task.title}`} 
                     />
                   </Box>
                   <Divider 
