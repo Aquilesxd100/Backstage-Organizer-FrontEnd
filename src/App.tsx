@@ -4,20 +4,24 @@ import Header from "./components/Header";
 import Content from "./components/Content";
 
 import "./css/styles.css";
-import { useState } from "react";
-import { WeeklyTasksData } from "./types/types";
+import { useEffect } from "react";
+import { tryToGetSavedWeekData } from "./store/courseDataSlice";
+import { useStoreDispatch } from "./store/store";
 
 function App() {
-  const [weeklyTasksData, setWeeklyTasksData] = 
-    useState<WeeklyTasksData>(weeklyTasksDataMock);
+  const dispatch = useStoreDispatch();
+
+  useEffect(() => {
+    dispatch(tryToGetSavedWeekData);
+  }, [])
 
   return (
     <Box
       width="100%"
       minHeight="100vh"
     >
-      <Header startWeekDate={weeklyTasksData.startDate} />
-      <Content weeklyTasksData={weeklyTasksData} />
+      <Header />
+      <Content />
     </Box>
   );
 }
