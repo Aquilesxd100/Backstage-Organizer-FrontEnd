@@ -2,14 +2,11 @@ import { Box, Fab, TextField, Typography } from "@mui/material";
 import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded';
 
 import { HeaderBox, HeaderDateBox } from "./HeaderStyles";
+import { RootState } from "../store/store";
+import { useSelector } from "react-redux";
 
-interface IHeaderProps {
-  startWeekDate: string | undefined
-}
-
-export default function Header({
-  startWeekDate
-}: IHeaderProps) {
+export default function Header() {
+  const { currentWeekData } = useSelector((state: RootState) => state.courseData)
   
   // Falta deixar quantidade de dias restantes para concluir
   // tarefa dinamicos e alterar cores de acordo
@@ -31,7 +28,7 @@ export default function Header({
       <Box
         display="flex"
         flexDirection="column"
-        sx={!startWeekDate 
+        sx={!currentWeekData?.startDate
           ? { opacity: 0, pointerEvents: "none"} 
           : {}
         }
@@ -43,7 +40,7 @@ export default function Header({
               size="small"
               label="Início da Semana"
               type="date"
-              value={startWeekDate}
+              value={!currentWeekData?.startDate}
             />
             <Box mx={1}>
               <Fab 
