@@ -1,22 +1,57 @@
 import { useSelector } from "react-redux";
 import { ContentBox } from "./ContentStyles";
-import { RootState } from "../store/store";
-import { Box, Button, Typography } from "@mui/material";
+import { RootState, useStoreDispatch } from "../store/store";
+import { Box, Button, Checkbox, FormControlLabel, Typography } from "@mui/material";
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import WeekModal from "./WeekModal";
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { changeTaskDoneStatusByIndex, saveWeekOnLocalStorage } from "../store/courseDataSlice";
 
 export default function Content() {
+  const dispatch = useStoreDispatch();
+
   const { currentWeekData } = useSelector((state: RootState) => state.courseData)
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleChangeTaskDoneStatus = (
+    taskIndex: number
+  ) => {
+    dispatch(changeTaskDoneStatusByIndex(taskIndex));
+  }
+
+  useEffect(() => {
+    if (currentWeekData) {
+      dispatch(saveWeekOnLocalStorage());
+    }
+  }, [currentWeekData])
   
   return (
     <ContentBox elevation={5}> 
       {
         currentWeekData 
         ?
-          <></>
+          <Box 
+            display="flex"
+            flexWrap="wrap"
+          >
+            {
+              currentWeekData.tasks.map((task, index) => (
+                <Fragment key={index}>
+                  <FormControlLabel 
+                    control={
+                      <Checkbox 
+                        checked={task.isDone}
+                        onChange={() => handleChangeTaskDoneStatus(index)}
+                        color="success" 
+                      />
+                    } 
+                    label={task.title} 
+                  />
+                </Fragment>
+              ))
+            }
+          </Box>
         :
           <Box
             width="100%"
