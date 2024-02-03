@@ -3,13 +3,13 @@ import { CourseDataBase, WeeklyTasksData } from "../types/types";
 import { convertedCourseDataJSON } from "../utils/convertedCourseData";
 
 interface ICourseDataState {
-  courseDataBase: CourseDataBase | null
-  currentWeekData: WeeklyTasksData | null
+  courseDataBase: CourseDataBase | null 
+  currentWeekData: WeeklyTasksData | null | undefined
 }
 
 const initialState : ICourseDataState = {
   courseDataBase: null,
-  currentWeekData: null
+  currentWeekData: undefined
 }
 
 export const courseDataSlice = createSlice({
@@ -21,8 +21,11 @@ export const courseDataSlice = createSlice({
     },
     tryToGetSavedWeekData: (state) => {
       const localStorageData = localStorage.getItem("courseSavedWeek");
-      if (localStorageData)
+      if (localStorageData) {
         state.currentWeekData = JSON.parse(localStorageData)
+      } else {
+        state.currentWeekData = null;
+      }
     },
     saveWeekOnLocalStorage: (state) => {
       const currentWeekJSON = JSON.stringify(state.currentWeekData);

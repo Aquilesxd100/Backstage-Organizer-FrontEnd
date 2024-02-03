@@ -147,35 +147,42 @@ export default function Content() {
           </Box>          
         </>
         :
-          <Box
-            width="100%"
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Typography
-              sx={{
-                textAlign: "center",
-                m: 2,
-                maxWidth: "600px",
-                textShadow: "1px 1px 1px #000000;"
-              }}
-              color="#6BD568"
-              variant="h4"
-              fontFamily="impact"
-            >
-              Você ainda não começou uma semana, clique no botão abaixo para iniciar.
-            </Typography>
-            <Button 
-              variant="contained" 
-              color="success"
-              endIcon={<LibraryBooksIcon />}
-              onClick={()=>setIsModalOpen(true)}
-            >
-              Nova Semana
-            </Button>
-          </Box>
+          <>
+            {
+              // Comparação adicional para evitar piscada na tela
+              // logo ao carregar, devido a delay para popular state
+              currentWeekData !== undefined &&
+              <Box
+                width="100%"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Typography
+                  sx={{
+                    textAlign: "center",
+                    m: 2,
+                    maxWidth: "600px",
+                    textShadow: "1px 1px 1px #000000;"
+                  }}
+                  color="#6BD568"
+                  variant="h4"
+                  fontFamily="impact"
+                >
+                  Você ainda não começou uma semana, clique no botão abaixo para iniciar.
+                </Typography>
+                <Button 
+                  variant="contained" 
+                  color="success"
+                  endIcon={<LibraryBooksIcon />}
+                  onClick={()=>setIsModalOpen(true)}
+                >
+                  Nova Semana
+                </Button>
+              </Box>
+            }
+          </>         
       }
       <WeekModal 
         isModalOpen={isModalOpen} 
