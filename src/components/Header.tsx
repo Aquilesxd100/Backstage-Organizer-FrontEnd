@@ -112,7 +112,7 @@ export default function Header() {
               textShadow: "1px 1px 2px #000000;",
             }}
           >
-            {currentWeekData.weekTitle}
+            {`#${currentWeekData.weekNumber} ${currentWeekData.weekTitle}`}
           </Typography>
         }      
       </Box>
