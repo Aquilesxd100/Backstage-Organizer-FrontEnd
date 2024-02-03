@@ -12,7 +12,7 @@ function App() {
   const dispatch = useStoreDispatch();
 
   useEffect(() => {
-    dispatch(tryToGetSavedWeekData);
+    dispatch(tryToGetSavedWeekData());
   }, [])
 
   return (
