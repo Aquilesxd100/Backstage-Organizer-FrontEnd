@@ -1,3 +1,7 @@
+export interface CourseDataBase {
+  weeklyTasksData: WeeklyTasksData[]
+}
+
 export interface WeeklyTasksData {
   weekNumber: number
   weekTitle: string
