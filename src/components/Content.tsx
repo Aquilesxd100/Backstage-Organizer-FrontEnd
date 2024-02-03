@@ -5,12 +5,12 @@ import { Box, Button, Checkbox, Divider, FormControlLabel, Typography } from "@m
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import WeekModal from "./WeekModal";
 import { useEffect, useState } from "react";
-import { changeTaskDoneStatusByIndex, clearCurrentWeek, saveWeekOnLocalStorage, setWeekDataByNumber } from "../store/courseDataSlice";
+import { changeTaskDoneStatusByIndex, clearCurrentWeek, fillCourseDataBase, saveWeekOnLocalStorage, setWeekDataByNumber } from "../store/courseDataSlice";
 
 export default function Content() {
   const dispatch = useStoreDispatch();
 
-  const { currentWeekData } = useSelector((state: RootState) => state.courseData)
+  const { currentWeekData,courseDataBase } = useSelector((state: RootState) => state.courseData)
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -23,6 +23,9 @@ export default function Content() {
 
   const handleNextWeek = () => {
     if (currentWeekData) {
+      if(!courseDataBase) 
+        dispatch(fillCourseDataBase())
+
       dispatch(setWeekDataByNumber(currentWeekData?.weekNumber + 1))
     }
   };
