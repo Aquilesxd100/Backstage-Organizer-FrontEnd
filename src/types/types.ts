@@ -1,12 +1,12 @@
 export interface WeeklyTasksData {
   weekNumber: number
   weekTitle: string
-  startDate: string
+  startDate?: string
   tasks: WeeklyTask[]
 }
 
-interface WeeklyTask {
+export interface WeeklyTask {
   title: string
-  description: string
+  descriptionItems: string[]
   isDone: boolean  
 }
