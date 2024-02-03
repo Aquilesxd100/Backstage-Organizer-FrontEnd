@@ -1,10 +1,11 @@
+import { useEffect } from "react";
+
 import { Box } from "@mui/material";
 
 import Header from "./components/Header";
 import Content from "./components/Content";
 
 import "./css/styles.css";
-import { useEffect } from "react";
 import { tryToGetSavedWeekData } from "./store/courseDataSlice";
 import { useStoreDispatch } from "./store/store";
 

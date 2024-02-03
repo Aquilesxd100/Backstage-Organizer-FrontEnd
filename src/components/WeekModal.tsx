@@ -1,8 +1,11 @@
-import { Box, Button, Divider, Modal, TextField, Typography } from "@mui/material";
-import { WeekModalBox } from "./WeekModalStyles";
 import { useEffect, useState } from "react";
-import { RootState, useStoreDispatch } from "../store/store";
+
+import { Box, Button, Divider, Modal, TextField, Typography } from "@mui/material";
+
 import { useSelector } from "react-redux";
+
+import { RootState, useStoreDispatch } from "../store/store";
+import { WeekModalBox } from "./WeekModalStyles";
 import { fillCourseDataBase, setWeekDataByNumber } from "../store/courseDataSlice";
 
 interface IWeekModalProps {

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { CourseDataBase, WeeklyTasksData } from "../types/types";
 import { convertedCourseDataJSON } from "../utils/convertedCourseData";
 

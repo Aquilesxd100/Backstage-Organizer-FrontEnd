@@ -1,6 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
-import courseDataReducer from "./courseDataSlice";
 import { useDispatch } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+
+import courseDataReducer from "./courseDataSlice";
 
 const store = configureStore ({
   reducer: {

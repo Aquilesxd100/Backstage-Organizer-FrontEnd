@@ -1,11 +1,20 @@
-import { useSelector } from "react-redux";
-import { ContentBox, TaskBox } from "./ContentStyles";
-import { RootState, useStoreDispatch } from "../store/store";
+import { useEffect, useState } from "react";
 import { Box, Button, Checkbox, Divider, FormControlLabel, Typography } from "@mui/material";
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+
 import WeekModal from "./WeekModal";
-import { useEffect, useState } from "react";
-import { changeTaskDoneStatusByIndex, clearCurrentWeek, fillCourseDataBase, saveWeekOnLocalStorage, setWeekDataByNumber } from "../store/courseDataSlice";
+
+import { useSelector } from "react-redux";
+
+import { ContentBox, TaskBox } from "./ContentStyles";
+import { RootState, useStoreDispatch } from "../store/store";
+import { 
+  changeTaskDoneStatusByIndex, 
+  clearCurrentWeek, 
+  fillCourseDataBase, 
+  saveWeekOnLocalStorage, 
+  setWeekDataByNumber 
+} from "../store/courseDataSlice";
 
 export default function Content() {
   const dispatch = useStoreDispatch();

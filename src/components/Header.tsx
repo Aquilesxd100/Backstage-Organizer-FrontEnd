@@ -1,11 +1,14 @@
+import { useEffect, useState } from "react";
+
 import { Box, Fab, TextField, Typography } from "@mui/material";
 import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded';
-import { toDate, differenceInDays } from "date-fns";
+
+import { differenceInDays } from "date-fns";
+import { useSelector } from "react-redux";
 
 import { HeaderBox, HeaderDateBox } from "./HeaderStyles";
 import { RootState } from "../store/store";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+
 import WeekModal from "./WeekModal";
 
 const convertDateToENFormat = (date: string | undefined) : string => {
