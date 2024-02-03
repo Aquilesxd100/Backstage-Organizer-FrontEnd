@@ -87,16 +87,35 @@ export default function Header() {
     <HeaderBox 
       component="header"
     >
-      <Typography 
-        color="#00ECDA"
-        sx={{
-          textShadow: "0 0 4px #000000;" 
-        }}
-        variant="h3"
-        fontFamily="fantasy"
+      <Box 
+        display="flex" 
+        flexDirection="column"
       >
-        Backstage Organizer
-      </Typography>
+        <Typography 
+          color="#00ECDA"
+          sx={{
+            textShadow: "0 0 4px #000000;",
+            mb: 1
+          }}
+          variant="h3"
+          fontFamily="fantasy"
+        >
+          Backstage Organizer
+        </Typography>  
+        {
+          currentWeekData &&
+            <Typography
+            color="#FB7846"
+            variant="h4"
+            fontFamily="fantasy"
+            sx={{
+              textShadow: "1px 1px 2px #000000;",
+            }}
+          >
+            {currentWeekData.weekTitle}
+          </Typography>
+        }      
+      </Box>
       <Box
         display="flex"
         flexDirection="column"
