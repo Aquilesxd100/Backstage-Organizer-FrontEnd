@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Checkbox, Divider, FormControlLabel, Typography } from "@mui/material";
+import { Box, Button, Checkbox, Divider, Typography } from "@mui/material";
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 import WeekModal from "./WeekModal";
 
 import { useSelector } from "react-redux";
 
-import { ContentBox, TaskBox } from "./ContentStyles";
+import { ContentBox, EmptyWeekTypography, TaskBox, TaskFormControlLabel } from "./ContentStyles";
 import { RootState, useStoreDispatch } from "../store/store";
 import { 
   changeTaskDoneStatusByIndex, 
@@ -68,21 +68,7 @@ export default function Content() {
                       backgroundColor: "#EBEBEB"
                     }}
                   >
-                    <FormControlLabel 
-                      sx={{
-                        px: 0.8,
-                        py: 0.3,
-                        "&& svg": {
-                          color: "#2e7d32"
-                        },
-                        "&& span": {
-                          color: "#33FFF0",
-                          letterSpacing: "0.45px",
-                          fontFamily: "fantasy",
-                          fontSize: "20px",
-                          textShadow: "-1px -1px 2px rgba(0, 0, 0, 0.5), 1px -1px 2px rgba(0, 0, 0, 0.5),-1px 1px 2px rgba(0, 0, 0, 0.5), 1px 1px 2px rgba(0, 0, 0, 0.5)"
-                        }
-                      }}
+                    <TaskFormControlLabel 
                       control={
                         <Checkbox 
                           checked={task.isDone}
@@ -171,19 +157,13 @@ export default function Content() {
                 alignItems="center"
                 justifyContent="center"
               >
-                <Typography
-                  sx={{
-                    textAlign: "center",
-                    m: 2,
-                    maxWidth: "600px",
-                    textShadow: "1px 1px 1px #000000;"
-                  }}
+                <EmptyWeekTypography
                   color="#6BD568"
                   variant="h4"
                   fontFamily="impact"
                 >
                   Você ainda não começou uma semana, clique no botão abaixo para iniciar.
-                </Typography>
+                </EmptyWeekTypography>
                 <Button 
                   variant="contained" 
                   color="success"
