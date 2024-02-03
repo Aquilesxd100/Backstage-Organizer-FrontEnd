@@ -24,6 +24,13 @@ export const courseDataSlice = createSlice({
       if (localStorageData)
         state.currentWeekData = JSON.parse(localStorageData)
     },
+    saveWeekOnLocalStorage: (state) => {
+      const currentWeekJSON = JSON.stringify(state.currentWeekData);
+
+      localStorage.setItem(
+        "courseSavedWeek", currentWeekJSON
+      );
+    },
     setWeekDataByNumber: (state, action: PayloadAction<number>) => {
       if (state.courseDataBase?.weeklyTasksData[action.payload]) {
         const currentDateInPTBRFormat = (new Date()).toLocaleDateString('pt-BR');
@@ -33,9 +40,23 @@ export const courseDataSlice = createSlice({
           startDate: currentDateInPTBRFormat
         };
       }
+    },
+    changeTaskDoneStatusByIndex: (state, action: PayloadAction<number>) => {
+      // Inverte o valor guardado fazendo proveito de referência
+      if(state.currentWeekData) {
+        const taskToUpdate = state.currentWeekData.tasks[action.payload];
+        taskToUpdate.isDone = !taskToUpdate.isDone;
+      }
     }
   }
 })
 
-export const { fillCourseDataBase, tryToGetSavedWeekData, setWeekDataByNumber } = courseDataSlice.actions;
+export const { 
+  fillCourseDataBase, 
+  tryToGetSavedWeekData, 
+  saveWeekOnLocalStorage,
+  setWeekDataByNumber, 
+  changeTaskDoneStatusByIndex
+} = courseDataSlice.actions;
+
 export default courseDataSlice.reducer;
