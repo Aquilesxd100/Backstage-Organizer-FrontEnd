@@ -41,6 +41,10 @@ export const courseDataSlice = createSlice({
         };
       }
     },
+    clearCurrentWeek: (state) => {
+      state.currentWeekData = null;
+      localStorage.removeItem("courseSavedWeek");
+    },
     changeTaskDoneStatusByIndex: (state, action: PayloadAction<number>) => {
       // Inverte o valor guardado fazendo proveito de referência
       if(state.currentWeekData) {
@@ -56,7 +60,8 @@ export const {
   tryToGetSavedWeekData, 
   saveWeekOnLocalStorage,
   setWeekDataByNumber, 
-  changeTaskDoneStatusByIndex
+  changeTaskDoneStatusByIndex,
+  clearCurrentWeek
 } = courseDataSlice.actions;
 
 export default courseDataSlice.reducer;
