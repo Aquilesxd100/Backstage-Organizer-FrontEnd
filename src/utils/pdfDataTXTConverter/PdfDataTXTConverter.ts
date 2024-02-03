@@ -1,7 +1,7 @@
-import { WeeklyTask, WeeklyTasksData } from "../../types/types";
+import { CourseDataBase, WeeklyTask, WeeklyTasksData } from "../../types/types";
 import { pdfDataTXT } from "./pdfDataTXT";
 
-export default function PdfDataTXTConverter(): WeeklyTasksData[] {
+export default function pdfDataTXTConverter(): CourseDataBase {
   const rawDataString : string = pdfDataTXT;
 
   const convertedData: WeeklyTasksData[] = [];
@@ -109,5 +109,7 @@ export default function PdfDataTXTConverter(): WeeklyTasksData[] {
     })
   })
 
-  return convertedData;
+  return {
+    weeklyTasksData: convertedData
+  };
 };
