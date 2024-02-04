@@ -52,7 +52,7 @@ const getRemainingDaysMessage = (date: string | undefined) : {
     )
 
     const daysRemaining = 7 - differenceDays;
-    if (daysRemaining >= 7) {
+    if (daysRemaining > 0) {
       response.message = `Você ainda tem ${daysRemaining} dias para concluir as tarefas dessa semana.`;
       response.color = "#00AE2C";
     } else if (daysRemaining === 0) {
