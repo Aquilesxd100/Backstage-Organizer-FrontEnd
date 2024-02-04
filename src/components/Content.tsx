@@ -75,7 +75,7 @@ export default function Content() {
                           color="success" 
                         />
                       } 
-                      label={`${index + 1} - ${task.title}`} 
+                      label={task.title} 
                     />
                   </Box>
                   <Divider 
@@ -87,30 +87,25 @@ export default function Content() {
                   <Box
                     minHeight="30px"
                   >
-                    {
-                      task.descriptionItems.map((item, index2) => (
-                        <Box 
-                          display="flex"
-                          alignItems="center"
-                          key={item + index2} 
-                          m={0.8}
-                        >
-                          <Typography
-                            fontFamily="arial"
-                            color="#FA6125"
-                            fontWeight="bold"
-                            fontSize="13px"
-                            sx={{
-                              textShadow: "1px 1px 1px rgba(0, 0, 0, 0.2);"
-                            }}
-                          >
-                            {
-                              item
-                            }
-                          </Typography>
-                        </Box>
-                      ))
-                    }
+                    <Box 
+                      display="flex"
+                      alignItems="center"
+                      m={0.8}
+                    >
+                      <Typography
+                        fontFamily="arial"
+                        color="#FA6125"
+                        fontWeight="bold"
+                        fontSize="13px"
+                        sx={{
+                          textShadow: "1px 1px 1px rgba(0, 0, 0, 0.2);"
+                        }}
+                      >
+                        {
+                          task.description
+                        }
+                      </Typography>
+                    </Box>
                   </Box>
                 </TaskBox>
               ))
