@@ -35,9 +35,11 @@ export default function pdfDataTXTConverter(): CourseDataBase {
 
     // Função de prenchimento das tarefas da semana
     const fillWeekTasks = (initialPosition: number) => {
+      let lastTaskWasDuplicated = false;
+      
       const currentTask : WeeklyTask = {
         title: "",
-        descriptionItems: [],
+        description: "",
         isDone: false
       }
       strLines.forEach((line, idx) => {
@@ -45,37 +47,56 @@ export default function pdfDataTXTConverter(): CourseDataBase {
         if (idx < initialPosition || !line.length)
           return;
 
-
-        // Guarda as informações da tarefa se for uma nova (":" indica titulo)
-        // mas não é a primeira ou se for o ultima linha 
-        if (
-          (line[line.length - 1] === ":" 
-          && idx > initialPosition)
-          || idx === strLines.length - 1
-        ) {
-          weekTasks.push(structuredClone(currentTask));
-          currentTask.descriptionItems = [];
+        // Se ultima tarefa se repete, não a adiciona na lista de novo
+        if (!lastTaskWasDuplicated) {
+          // Guarda as informações da tarefa se for uma nova (":" indica titulo)
+          // mas não é a primeira ou se for o ultima linha           
+          if (
+            (
+              (line[line.length - 1] === ":" 
+              && idx > initialPosition)
+              || idx === strLines.length - 1
+            )
+          ) {
+            weekTasks.push(structuredClone(currentTask));
+            currentTask.description = "";
+          }          
+        } else {
+          lastTaskWasDuplicated = false;
         }
+        // FALTA PULAR A ADICAO DA PRIMEIRA VERSAO ORIGINAL DA TAREFA
+        // QUE É DUPLICADA
 
         // Preenche o titulo da tarefa
         if (line[line.length - 1] === ":") {
           currentTask.title = line.substring(0, line.length - 1);
         } else {
-          // Verifica se a linha de descrição esta duplicada
-          // e faz o devido tratamento se for o caso
-          const isDuplicatedLines = 
+          // Verifica se a descrição indica que a tarefa se repete
+          const isAnDuplicate = 
             line.includes("Parte") 
             && line.substring(6, line.length).includes("Parte");
 
-          if(!isDuplicatedLines) {
-            currentTask.descriptionItems.push(line);
-          } else {
-            // Separa a linha sem eliminar o separador "Parte"
-            const separatedLines : string[] = line.split(/(?=Parte)/g);
-            
-            separatedLines.forEach((spLine) => 
-              currentTask.descriptionItems.push(spLine.trim())
-            )
+          if(!isAnDuplicate) {
+            currentTask.description = line;
+          } else { 
+            lastTaskWasDuplicated = true;
+            // Separa a linha em tarefas separadas
+            const separatedLines : string[] = line.split("Parte")
+              // Filtra pedaços de texto vazios que sobraram
+              .filter((sepLine) => sepLine.trim().length)
+
+            separatedLines.forEach((sepLine, idx) => {
+              // Corta a descrição de cada uma das tarefas
+              const descriptionStartIndex = sepLine.indexOf(".") + 2;
+              const processedDescription = sepLine.substring(descriptionStartIndex);
+
+              // Adiciona as tarefas na lista
+              weekTasks.push({
+                title: `${currentTask.title} ${idx + 1}`,
+                description: processedDescription,
+                isDone: false
+              });
+            })
           }
         }
       })
@@ -102,13 +123,27 @@ export default function pdfDataTXTConverter(): CourseDataBase {
       fillWeekTasks(1);
     }
 
+    // Adição de tarefas não incluidas no PDF
+    // que são padrão de cada semana
+    for (let c = 1; c < 4; c++) {
+      weekTasks.push({
+        title: `Just Do It ${c}`,
+        description: "",
+        isDone: false
+      })
+    }
+    weekTasks.push({
+      title: "Independent reading",
+      description: "",
+      isDone: false
+    })
+
     convertedData.push({
       weekNumber: Number(weekNumber),
       weekTitle: weekTitle,
       tasks: weekTasks
     })
   })
-
   return {
     weeklyTasksData: convertedData
   };
