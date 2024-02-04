@@ -11,6 +11,6 @@ export interface WeeklyTasksData {
 
 export interface WeeklyTask {
   title: string
-  descriptionItems: string[]
+  description: string
   isDone: boolean  
 }
