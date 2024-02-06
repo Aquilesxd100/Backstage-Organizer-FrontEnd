@@ -72,9 +72,7 @@ export default function pdfDataTXTConverter(): CourseDataBase {
           currentTask.title = line.substring(0, line.length - 1);
         } else {
           // Verifica se a descrição indica que a tarefa se repete
-          const isAnDuplicate = 
-            line.includes("Parte") 
-            && line.substring(6, line.length).includes("Parte");
+          const isAnDuplicate = line.includes("Parte")
 
           if(!isAnDuplicate) {
             currentTask.description = line;
