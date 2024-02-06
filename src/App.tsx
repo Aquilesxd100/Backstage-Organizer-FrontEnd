@@ -8,12 +8,14 @@ import Content from "./components/Content";
 import "./css/styles.css";
 import { tryToGetSavedWeekData } from "./store/courseDataSlice";
 import { useStoreDispatch } from "./store/store";
+/* import pdfDataTXTConverter from "./utils/pdfDataTXTConverter/pdfDataTXTConverter"; */
 
 function App() {
   const dispatch = useStoreDispatch();
 
   useEffect(() => {
     dispatch(tryToGetSavedWeekData());
+    /* console.log(JSON.stringify(pdfDataTXTConverter())) */
   }, [])
 
   return (
