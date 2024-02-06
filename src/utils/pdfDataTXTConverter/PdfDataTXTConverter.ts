@@ -72,7 +72,8 @@ export default function pdfDataTXTConverter(): CourseDataBase {
           currentTask.title = line.substring(0, line.length - 1);
         } else {
           // Verifica se a descrição indica que a tarefa se repete
-          const isAnDuplicate = line.includes("Parte")
+          const isAnDuplicate = 
+            line.includes("Parte") 
 
           if(!isAnDuplicate) {
             currentTask.description = line;
@@ -83,6 +84,7 @@ export default function pdfDataTXTConverter(): CourseDataBase {
               // Filtra pedaços de texto vazios que sobraram
               .filter((sepLine) => sepLine.trim().length)
 
+
             separatedLines.forEach((sepLine, idx) => {
               // Corta a descrição de cada uma das tarefas
               const descriptionStartIndex = sepLine.indexOf(".") + 2;
@@ -90,7 +92,7 @@ export default function pdfDataTXTConverter(): CourseDataBase {
 
               // Adiciona as tarefas na lista
               weekTasks.push({
-                title: `${currentTask.title} ${idx + 1}`,
+                title: `${currentTask.title} ${weekTasks.filter((t) => t.title.includes(currentTask.title)).length + 1}`,
                 description: processedDescription,
                 isDone: false
               });
