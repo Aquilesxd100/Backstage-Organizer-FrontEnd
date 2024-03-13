@@ -59,7 +59,7 @@ const getRemainingDaysMessage = (date: string | undefined) : {
       response.message = "Você só tem mais um dia para concluir as tarefas dessa semana.";
       response.color = "#FF9900";
     } else {
-      response.message = `Você esta ${Math.abs(daysRemaining)} dias atrasado nas tarefas dessa semana.`;
+      response.message = `Você esta ${Math.abs(daysRemaining)} dia(s) atrasado nas tarefas dessa semana.`;
       response.color = "#FF0000";
     }
   }
